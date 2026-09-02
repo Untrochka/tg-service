@@ -1,0 +1,30 @@
+# fly.toml app configuration file.
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+# No `app` name here on purpose — this repo is public, and the app name is
+# effectively the app's public URL (<app>.fly.dev). It's passed at deploy
+# time instead: --app "$FLY_APP_NAME" in .github/workflows/fly-deploy.yml
+# (from a repo secret), or `fly deploy --app <name>` / a local FLY_APP env
+# var when deploying by hand. See README.md's deploy section.
+
+primary_region = 'fra'
+
+[build]
+[processes]
+  app = 'node src/listener.js'
+
+[[mounts]]
+  source = 'tg_notion_data'
+  destination = '/app/data'
+
+[[restart]]
+  policy = 'always'
+  processes = ['app']
+
+[[vm]]
+  size = 'shared-cpu-1x'
+  memory = '256mb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 256

@@ -1,0 +1,20 @@
+{
+  "name": "tg-notion-sync",
+  "version": "1.0.0",
+  "description": "Слушает Telegram-канал/чат с банковскими уведомлениями и автоматически записывает операции в Notion",
+  "main": "src/listener.js",
+  "type": "commonjs",
+  "scripts": {
+    "login": "node src/login.js",
+    "list-chats": "node src/list-chats.js",
+    "start": "node src/listener.js",
+    "test-parse": "node src/test-parse.js",
+    "test": "node --test src/*.test.js"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.15",
+    "dotenv": "^16.4.5",
+    "input": "^1.0.1",
+    "telegram": "^2.22.2"
+  }
+}
